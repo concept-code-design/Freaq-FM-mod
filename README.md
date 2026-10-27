@@ -1,16 +1,18 @@
-# Meebleeps / Wirehead Freaq FM Synth
+# An interpretation of the Meebleeps / Wirehead Freaq FM Synth
 ## Arduino Synth with Dual-voice 2-OP FM | Generative 2-track Polymetric Sequencer | Mozzi SDK
 
 ## NOTE This code is an open-source prototype and is not compatible with the Wirehead Instruments version of Freaq FM hardware
-- Meebleeps was my personal project and was rebranded as Wirehead Instruments in 2023 to avoid brand confusion with MeeBlip - another completely separate synth design company.
+- Meebleeps was rebranded as Wirehead Instruments in 2023 to avoid brand confusion with MeeBlip - another completely separate synth design company.
 
-An evolution of my first Mozzi synth build, this one features dual independent 2-operator FM voices paired with a 2-track generative sequencer.  
+This interpretation is based on https://github.com/Meebleeps/MeeBleeps-Freaq-FM-Synth
+
+It uses a different PCB with slightly different layout. It features dual independent 2-operator FM voices paired with a 2-track generative sequencer.  
 
 Each voice has independent carrier & modulator waveforms, FM ratio, modulation envelope & LFO.
 
 Both tracks share the a single pattern (inspired by the Intellijel Metropolix) and can be stacked in unison or have different polymetric step-counts.  Track 1 can be offset 0-3 octaves above track 2 for separate bass & lead.
 
-It started simple... but ended up cramming the 32K flash to the brim with features and wavetables, maxxing out the interface with obscure button combinations, and pushing the 16Mhz Arduino Nano to the edge!  Upside is it makes lots of funky noises now!
+The code was addressed by Claude to match my hardware. It now also includes working MIDI out.
 
 
  #### Source Code:      https://github.com/Meebleeps/MeeBleeps-Freaq-FM-Synth
@@ -18,22 +20,14 @@ It started simple... but ended up cramming the 32K flash to the brim with featur
  #### Youtube Channel:  https://www.youtube.com/channel/UC4I1ExnOpH_GjNtm7ZdWeWA
 
 Source released under Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-Copyright (C) 2022 Meebleeps
+Copyright (C) 2026 Concept & Code
 
 ***
 
 ## Important build-notes 
 
-- My builds have used normally-closed switches, so the code assumes this.  09 May 2022: Added complier switches to handle normally-open switches
-- This will probably compile to Arduino Uno, but it won't work properly without extensive modification as it uses all 8 of the Nano's analog input pins
-- If you have issues with the compiled size not fitting in the Nano, this may be due to different compiler (I use VSCode & PlatformIO) or different bootloader in the Arduino (not sure which I have, but am compiling to Elegoo brand arduino nano). 
-  - Check the compiler options in **MutantFMSynthOptions.h** to alter switch type or compile size
-  - open the file MutantFMSynthOptions.h
-  - find the line: `//#define COMPILE_SMALLER_BINARY`
-  - uncomment the line so it looks like this:  `#define COMPILE_SMALLER_BINARY`
-  - Then compile. It should now easily fit into the Nano.  This omits the semi-random wave tablesbut you probably won't miss it! :)
-- Do not install the Mozzi library from PlatformIO in VSCode, it's outdated and will not build successfully. Instead, install its [latest git master branch](https://github.com/sensorium/Mozzi) to `lib/mozzi`. 
-- The default settings target the Nano ATmega328 with the new bootloader. If you have avrdude errors during upload, you might have the old bootloader: change both instances of `nanoatmega328new` to `nanoatmega328` in `plaformio.ini`.
+- My pcb has normally-open switches
+- Work and Compile PlatformIO (I use VSCodium)). 
 
 ***
 
